@@ -4,7 +4,6 @@ import {
   Image,
   InteractionManager,
   PanResponderInstance,
-  Slider,
   StyleSheet,
   TouchableOpacity,
   View,
@@ -163,23 +162,7 @@ export class HoloColorPicker extends React.PureComponent<
     return rad - Math.PI - Math.PI / 2
   }
 
-  _getSlider(): typeof Slider {
-    if (this.props.hideSliders) {
-      return undefined
-    }
 
-    if (this.props.sliderComponent) {
-      return this.props.sliderComponent as any
-    }
-
-    if (!Slider) {
-      throw new Error(
-        "You need to install `@react-native-community/slider` and pass it (or any other Slider compatible component) as `sliderComponent` prop"
-      )
-    }
-
-    return Slider
-  }
 
   getColor() {
     return tinycolor(this._getColor()).toHexString()
@@ -204,7 +187,6 @@ export class HoloColorPicker extends React.PureComponent<
       isRTL: this._isRTL,
     })
 
-    const SliderComp = this._getSlider()
 
     return (
       <View style={style}>
@@ -256,12 +238,6 @@ export class HoloColorPicker extends React.PureComponent<
             </View>
           )}
         </View>
-        {this.props.hideSliders ? null : (
-          <View>
-            <SliderComp value={s} onValueChange={this._onSValueChange} />
-            <SliderComp value={v} onValueChange={this._onVValueChange} />
-          </View>
-        )}
       </View>
     )
   }
