@@ -7,6 +7,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   View,
+  Pressable
 } from "react-native"
 import tinycolor from "tinycolor2"
 
@@ -212,11 +213,14 @@ export class HoloColorPicker extends React.PureComponent<
                 />
               </View>
               {oldColor && (
+                <Pressable  onPressOut={this._onColorSelected}>
                 <TouchableOpacity
                   style={[styles.selectedPreview, computed.selectedPreview]}
                   onPress={this._onColorSelected}
                   activeOpacity={0.7}
+
                 />
+                </Pressable>
               )}
               {oldColor && (
                 <TouchableOpacity
@@ -226,6 +230,7 @@ export class HoloColorPicker extends React.PureComponent<
                 />
               )}
               {!oldColor && (
+              <Pressable  onPressOut={this._onColorSelected}>
                 <TouchableOpacity
                   style={[
                     styles.selectedFullPreview,
@@ -234,6 +239,7 @@ export class HoloColorPicker extends React.PureComponent<
                   onPress={this._onColorSelected}
                   activeOpacity={0.7}
                 />
+                </Pressable>
               )}
             </View>
           )}
